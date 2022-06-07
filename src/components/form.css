@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  outline-color: c;
+  border-color: lightblue;
+}
+section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #557a85;
+}
+h2 {
+  color: white;
+}
+.form {
+  width: 60%;
+  height: auto;
+  background-color: #7395ae;
+}
+.label {
+  display: block;
+  font-size: larger;
+  font-weight: bolder;
+  padding: 1.5rem 0 0.8rem 0;
+  color: white;
+}
+.input {
+  padding: 0.5rem;
+  font-size: large;
+  border-radius: 0.5rem;
+}
+button {
+  padding: 0.6rem;
+  margin: 1.5rem auto;
+  font-size: large;
+  border-radius: 0.5rem;
+  color: rgb(109, 221, 178);
+}
+.select option {
+  text-emphasis-color: white;
+}
+
+span {
+  color: white;
+  text-decoration: aliceblue;
+  padding: 0.4rem;
+  font-size: large;
+}
+.checkbox {
+  padding: 1rem 2.5rem 0 0;
+}
+p {
+  color: red;
+}
+.uiMessage{
+    padding: 2rem;
+    font-weight: bolder;
+    color:aqua;
+}
