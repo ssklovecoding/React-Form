@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function Form() {
   const [isCheck, setIsCheck] = useState(false);
+  
   const [formError, setFormError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -12,6 +13,7 @@ function Form() {
     phone: "",
     gender: "",
     courses: "",
+    checkbox: ""    
   });
 
   function handelChange(event) {
@@ -21,11 +23,19 @@ function Form() {
     setUserInput({ ...userInput, [name]: value });
     console.log(userInput);
   }
-
+   
   function handelClick(event) {
     event.preventDefault();
     setFormError(validate(userInput));
-    setIsSubmit(true);
+    if (isCheck === true) {
+      setIsSubmit(true); 
+      setIsCheck(false);
+      
+    }else{
+       setIsSubmit(false)
+       alert("check terms and condition")
+    }
+    
   }
 
   useEffect(
@@ -33,15 +43,17 @@ function Form() {
       console.log(formError);
       if (Object.keys(formError).length === 0 && isSubmit) {
         console.log(userInput);
+       
         setUserInput({
           fullname: "",
           email: "",
           password: "",
           phone: "",
-          gender: "",
-          courses: "",
-        });
-      }
+          gender:"",
+          courses:"",
+        }); 
+        
+      } 
     },
     [formError]
   );
@@ -52,6 +64,7 @@ function Form() {
     if (!values.fullname) {
       errors.fullname = "Fullname is Required.";
     }
+
     if (!values.email) {
       errors.email = "Email is Required.";
     } else if (!regex.test(values.email)) {
@@ -68,17 +81,18 @@ function Form() {
     if (!values.phone) {
       errors.phone = "Phone No. is Required.";
     }
+
     if (!values.gender) {
       errors.gender = "Select your Gender";
     }
+
     if (!values.courses) {
       errors.courses = "Select a Courses";
     }
-    if (isCheck === false) {
-      alert("Please check term and condition");
-    }
+    
     return errors;
   }
+  
 
   return (
     <section>
@@ -101,7 +115,6 @@ function Form() {
               value={userInput.fullname}
               onChange={handelChange}
               className="input"
-              
             />
           </div>
           <p>{formError.fullname}</p>
@@ -146,30 +159,38 @@ function Form() {
           </div>
           <p>{formError.phone}</p>
 
-          <div onChange={handelChange}>
+          <div>
             <label className="label">Gender</label>
+            
             <input
               type="radio"
               value="Male"
+              checked={userInput.gender=== "Male"}
               name="gender"
               className="input"
-            />{" "}
+              onChange={handelChange}
+            />
             <span>Male</span>
             <input
               type="radio"
               value="Female"
               name="gender"
+              checked={userInput.gender=== "Female"}
               className="input"
-            />{" "}
+              onChange={handelChange}
+            />
             <span>Female</span>
             <input
               type="radio"
-              value="Other"
+              value="Others"
               name="gender"
+              checked={userInput.gender=== "Others"}
               className="input"
-            />{" "}
-            <span>Other</span>
+              onChange={handelChange}
+            />
+            <span>Others</span>
           </div>
+          
           <p>{formError.gender}</p>
 
           <div>
@@ -181,6 +202,7 @@ function Form() {
               value={userInput.courses}
               id="courses"
             >
+              <option >Select course</option>
               <option value="JavaScript">JavaScript</option>
               <option value="Node">Node</option>
               <option value="React">React</option>
@@ -191,14 +213,17 @@ function Form() {
 
           <div className="checkbox">
             <input
+              name="checkbox"
+              value={userInput.checkbox}
               type="checkbox"
               checked={isCheck}
               onChange={() => {
-                setIsCheck(!isCheck);
+              setIsCheck(!isCheck);
               }}
             />
             <span>Terms and condition</span>
           </div>
+          <p>{formError.checkbox}</p>
           <button type="submit">Sign Up</button>
         </form>
       </div>
